@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBox1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pictureBoxLogoA.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAeUAAACnCAYAAAAv10SxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAA2ClJREFUeF7svQW8HsUV93/vjbsLBHd31wLFKVqstEgpxV1bHAq0UFra0mLF3Vqc
+        vAAADrwBlbxySQAA2ClJREFUeF7svQW8HsUV93/vjbsLBHd31wLFKVqstEgpxV1bHAq0UFra0mLF3Vqc
         4O4QJEoMkhASQoR4ciXnf34zOztnZs/us8+9F+j7/t/PJ9/cZ2fOOXNGds7Oak2/pdegUbX96fPaAQn4
         3Z9GR7h0yFp5jQEsGxPqF2FlNV3nm/fP/K6T6cl2nBbnFcmktn8svk+fmm/P9Xl+v+dTabwU+eX6v5j8
         MRbK6TItRaufSytCyv8Q2PrLfSuC94kU3g77Ru+f1iT0x25rcjFST/Ozcts7vRgvo+tlKZbTyojR9EJc
@@ -1046,10 +1046,10 @@
         HNurb5H7sbGlXvZwsY8sI8J8Qj6U7S96/f8///3nXyGC6e3jcMHxAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pictureBox8.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pictureBoxLogoB.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAeUAAACnCAYAAAAv10SxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wAAADsABataJCQAA2ClJREFUeF7svQW8HsUV93/vjbsLBHd31wLFKVqstEgpxV1bHAq0UFra0mLF3Vqc
+        vAAADrwBlbxySQAA2ClJREFUeF7svQW8HsUV93/vjbsLBHd31wLFKVqstEgpxV1bHAq0UFra0mLF3Vqc
         4O4QJEoMkhASQoR4ciXnf34zOztnZs/us8+9F+j7/t/PJ9/cZ2fOOXNGds7Oak2/pdegUbX96fPaAQn4
         3Z9GR7h0yFp5jQEsGxPqF2FlNV3nm/fP/K6T6cl2nBbnFcmktn8svk+fmm/P9Xl+v+dTabwU+eX6v5j8
         MRbK6TItRaufSytCyv8Q2PrLfSuC94kU3g77Ru+f1iT0x25rcjFST/Ozcts7vRgvo+tlKZbTyojR9EJc

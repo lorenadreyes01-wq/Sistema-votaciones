@@ -109,6 +109,7 @@
             btnPlancha.TabIndex = 5;
             btnPlancha.Text = "Planchas";
             btnPlancha.UseVisualStyleBackColor = false;
+            btnPlancha.Click += btnPlancha_Click;
             // 
             // btnUsuarios
             // 

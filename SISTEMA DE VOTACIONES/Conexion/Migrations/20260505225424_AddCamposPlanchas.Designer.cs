@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SISTEMA_DE_VOTACIONES.Conexion;
 
@@ -11,9 +12,11 @@ using SISTEMA_DE_VOTACIONES.Conexion;
 namespace SISTEMA_DE_VOTACIONES.Migrations
 {
     [DbContext(typeof(SistemaVotacionesContext))]
-    partial class SistemaVotacionesContextModelSnapshot : ModelSnapshot
+    [Migration("20260505225424_AddCamposPlanchas")]
+    partial class AddCamposPlanchas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

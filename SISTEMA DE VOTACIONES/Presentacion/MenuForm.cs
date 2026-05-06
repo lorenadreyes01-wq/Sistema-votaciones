@@ -1,4 +1,6 @@
-﻿using SISTEMA_DE_VOTACIONES.Entidades;
+﻿using Microsoft.EntityFrameworkCore;
+using SISTEMA_DE_VOTACIONES.Conexion;
+using SISTEMA_DE_VOTACIONES.Entidades;
 using SISTEMA_DE_VOTACIONES.Logica;
 using System;
 using System.Collections.Generic;
@@ -14,13 +16,18 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
     {
         private Usuario _usuario;
         private readonly UsuarioService _usuarioService;
+        private readonly SistemaVotacionesContext _context;
+        private readonly Usuario _usuarioActual;
 
         public MenuForm(Usuario usuario, UsuarioService usuarioService)
         {
             InitializeComponent();
 
             _usuario = usuario;
+            _usuarioActual = usuario;
             _usuarioService = usuarioService;
+            _context = new SistemaVotacionesContext();
+
             ConfigurarMenuPorRol();
         }
 
@@ -39,8 +46,8 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
             }
             else if (_usuario.Rol == "Creador de Plancha")
             {
-                btnUsuarios.Visible = false; 
-                btnPlancha.Visible = true;   
+                btnUsuarios.Visible = false;
+                btnPlancha.Visible = true;
             }
             else
             {
@@ -63,6 +70,12 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
         {
             UsuariosForm usuariosForm = new UsuariosForm(_usuarioService);
             usuariosForm.ShowDialog();
+        }
+
+        private void btnPlancha_Click(object sender, EventArgs e)
+        {
+            var form = new PlanchaForm(_context, _usuarioActual);
+            form.ShowDialog();
         }
     }
 }

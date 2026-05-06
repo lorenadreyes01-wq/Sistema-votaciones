@@ -10,6 +10,7 @@ namespace SISTEMA_DE_VOTACIONES.Conexion
     {
         private readonly SistemaVotacionesContext _context;
 
+        // Constructor recibe el contexto
         public PlanchaRepository(SistemaVotacionesContext context)
         {
             _context = context;
@@ -44,10 +45,12 @@ namespace SISTEMA_DE_VOTACIONES.Conexion
                 existente.Presidente = plancha.Presidente;
                 existente.Vicepresidente = plancha.Vicepresidente;
                 existente.Secretario = plancha.Secretario;
-                existente.CreadorId = plancha.CreadorId; // 🔹 mantener el creador
+                existente.Lema = plancha.Lema;
+                existente.PresidenteFoto = plancha.PresidenteFoto;
+                existente.VicepresidenteFoto = plancha.VicepresidenteFoto;
+                existente.SecretarioFoto = plancha.SecretarioFoto;
                 _context.SaveChanges();
             }
-           
         }
 
         // Eliminar
