@@ -10,6 +10,9 @@ namespace SISTEMA_DE_VOTACIONES.Entidades
         public int UsuarioId { get; set; }
         public int? PlanchaId { get; set; } // null si es voto nulo
         public DateTime Fecha { get; set; }
+
+        public Usuario Usuario { get; set; }
+        public Plancha Plancha { get; set; }
     }
 
 }

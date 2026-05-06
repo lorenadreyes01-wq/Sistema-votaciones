@@ -16,5 +16,7 @@ namespace SISTEMA_DE_VOTACIONES.Entidades
         public string PresidenteFoto { get; set; }
         public string VicepresidenteFoto { get; set; }
         public string SecretarioFoto { get; set; }
+
+        public Partido Partido { get; set; }
     }
 }
