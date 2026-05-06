@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace SISTEMA_DE_VOTACIONES.Presentacion
 {
-    public partial class Datosgenerales : Form
+    public partial class Datosform : Form
     {
         private readonly SistemaVotacionesContext _context;
         private readonly DateTime _horaCierre;
-        public Datosgenerales(SistemaVotacionesContext context, DateTime horaCierre)
+        public Datosform(SistemaVotacionesContext context, DateTime horaCierre)
         {
             InitializeComponent();
             _context = context;
@@ -33,28 +33,30 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
       private void RefrescarDatos()
         {
             int votosEmitidos = _context.Votaciones.Count();
-            int padronElectoral = _context.Usuarios.Count(); // todos pueden votar
+            int padronElectoral = _context.Usuarios.Count(); 
             int participantes = _context.Votaciones.Select(v => v.UsuarioId).Distinct().Count();
             int votosNulos = _context.Votaciones.Count(v => v.PlanchaId == null);
 
-            lblVotosEmitidos.Text = $"Votos Emitidos: {votosEmitidos}";
-            lblPadronElectoral.Text = $"Padrón Electoral: {padronElectoral}";
-            lblParticipantes.Text = $"Participantes: {participantes}";
-            lblTotales.Text = $"Totales (incl. nulos): {votosEmitidos}";
+            lblVotosEmitidos.Text = $"{votosEmitidos}";
+            lblPadronElectoral.Text = $"{padronElectoral}";
+            lblParticipantes.Text = $"{participantes}";
+            lblTotales.Text = $"{votosEmitidos}";
 
-            var ranking = _context.Votaciones
-                .Where(v => v.PlanchaId != null)
-                .GroupBy(v => v.Plancha.Partido.Nombre)
-                .Select(g => new
-                {
-                    Partido = g.Key,
-                    Votos = g.Count(),
-                    Porcentaje = padronElectoral > 0
-                        ? Math.Round((double)g.Count() / padronElectoral * 100, 2)
-                        : 0
-                })
-                .OrderByDescending(r => r.Votos)
-                .ToList();
+         var ranking = _context.Votaciones
+        .Include(v => v.Plancha)
+        .ThenInclude(pl => pl.Partido)
+        .Where(v => v.PlanchaId != null)
+        .GroupBy(v => v.Plancha.Partido.Nombre)
+        .Select(g => new {
+        Partido = g.Key,
+        Votos = g.Count(),
+        Porcentaje = padronElectoral > 0
+        ? Math.Round((double)g.Count() / padronElectoral * 100, 2) + "%"
+         : "0%"
+
+        })
+    .OrderByDescending(r => r.Votos)
+    .ToList();
 
             dgvRankingPartidos.DataSource = ranking;
         }

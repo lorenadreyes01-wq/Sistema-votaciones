@@ -68,7 +68,7 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
                                 "Acceso denegado",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
-                return; 
+                return;
             }
 
             var votacionesForm = new Votaciones(_context, _usuarioActual);
@@ -95,6 +95,15 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
         {
             var form = new PlanchaForm(_context, _usuarioActual);
             form.ShowDialog();
+        }
+
+        private void btnDatos_Click(object sender, EventArgs e)
+        {
+            DateTime horaCierre = new DateTime(2026, 5, 12, 18, 0, 0);
+
+           
+            var formDatos = new Datosform(_context, horaCierre);
+            formDatos.ShowDialog(); 
         }
     }
 }

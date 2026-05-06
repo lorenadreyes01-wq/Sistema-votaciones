@@ -85,6 +85,7 @@
             btnDatos.TabIndex = 3;
             btnDatos.Text = "Datos Generales";
             btnDatos.UseVisualStyleBackColor = false;
+            btnDatos.Click += btnDatos_Click;
             // 
             // btnCerrar
             // 
