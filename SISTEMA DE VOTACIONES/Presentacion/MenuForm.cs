@@ -29,6 +29,8 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
             _context = new SistemaVotacionesContext();
 
             ConfigurarMenuPorRol();
+            btnVotaciones.Click += BtnVotaciones_Click;
+
         }
 
         private void ConfigurarMenuPorRol()
@@ -54,6 +56,23 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
                 btnUsuarios.Visible = false;
                 btnPlancha.Visible = false;
             }
+        }
+
+        private void BtnVotaciones_Click(object sender, EventArgs e)
+        {
+            bool yaVoto = _context.Votaciones.Any(v => v.UsuarioId == _usuarioActual.Id);
+
+            if (yaVoto)
+            {
+                MessageBox.Show("Ya has ejercido tu voto. No puedes volver a votar.",
+                                "Acceso denegado",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return; 
+            }
+
+            var votacionesForm = new Votaciones(_context, _usuarioActual);
+            votacionesForm.ShowDialog();
         }
 
         private void MenuForm_Load(object sender, EventArgs e)

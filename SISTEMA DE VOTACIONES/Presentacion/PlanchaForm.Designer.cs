@@ -585,9 +585,11 @@
             // 
             // btnActualizar
             // 
+            btnActualizar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnActualizar.ForeColor = SystemColors.MenuHighlight;
             btnActualizar.Location = new Point(335, 809);
             btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(132, 23);
+            btnActualizar.Size = new Size(132, 31);
             btnActualizar.TabIndex = 13;
             btnActualizar.Text = "ACTUALIZAR";
             btnActualizar.UseVisualStyleBackColor = true;

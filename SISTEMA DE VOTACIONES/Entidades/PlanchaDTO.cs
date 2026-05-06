@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SISTEMA_DE_VOTACIONES.Presentacion
+namespace SISTEMA_DE_VOTACIONES.Entidades
 {
     public class PlanchaDTO
     {
