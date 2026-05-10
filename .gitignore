@@ -12,8 +12,8 @@ Release/
 *.sln.docstates
 
 # Archivos de solución y proyecto
-SIATEMA DE VOTACIONES.slnx
-SIATEMA DE VOTACIONES/
+SISTEMA DE VOTACIONES.slnx
+SISTEMA DE VOTACIONES/
 
 # Archivos de base de datos locales
 *.mdf
