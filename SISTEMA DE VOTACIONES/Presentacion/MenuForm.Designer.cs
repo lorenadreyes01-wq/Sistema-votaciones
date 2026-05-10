@@ -73,6 +73,7 @@
             btnPanel.TabIndex = 2;
             btnPanel.Text = "Panel de Votaciones";
             btnPanel.UseVisualStyleBackColor = false;
+            btnPanel.Click += btnPanel_Click;
             // 
             // btnDatos
             // 

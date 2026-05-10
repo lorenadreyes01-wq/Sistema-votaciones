@@ -101,9 +101,15 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
         {
             DateTime horaCierre = new DateTime(2026, 5, 12, 18, 0, 0);
 
-           
+
             var formDatos = new Datosform(_context, horaCierre);
-            formDatos.ShowDialog(); 
+            formDatos.ShowDialog();
+        }
+
+        private void btnPanel_Click(object sender, EventArgs e)
+        {
+            var panel = new Panelform(_context);
+            panel.ShowDialog();
         }
     }
 }

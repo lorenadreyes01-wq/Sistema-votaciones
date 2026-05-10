@@ -13,7 +13,7 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
     public partial class Datosform : Form
     {
         private readonly SistemaVotacionesContext _context;
-        private readonly DateTime _horaCierre;
+        private readonly DateTime _horaCierre = new DateTime(2026, 5, 12, 18, 0, 0);
         public Datosform(SistemaVotacionesContext context, DateTime horaCierre)
         {
             InitializeComponent();
@@ -28,12 +28,12 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
             timerTiempoRestante.Tick += TimerTiempoRestante_Tick;
             timerTiempoRestante.Start();
         }
-    
 
-      private void RefrescarDatos()
+
+        private void RefrescarDatos()
         {
             int votosEmitidos = _context.Votaciones.Count();
-            int padronElectoral = _context.Usuarios.Count(); 
+            int padronElectoral = _context.Usuarios.Count();
             int participantes = _context.Votaciones.Select(v => v.UsuarioId).Distinct().Count();
             int votosNulos = _context.Votaciones.Count(v => v.PlanchaId == null);
 
@@ -42,21 +42,22 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
             lblParticipantes.Text = $"{participantes}";
             lblTotales.Text = $"{votosEmitidos}";
 
-         var ranking = _context.Votaciones
-        .Include(v => v.Plancha)
-        .ThenInclude(pl => pl.Partido)
-        .Where(v => v.PlanchaId != null)
-        .GroupBy(v => v.Plancha.Partido.Nombre)
-        .Select(g => new {
-        Partido = g.Key,
-        Votos = g.Count(),
-        Porcentaje = padronElectoral > 0
-        ? Math.Round((double)g.Count() / padronElectoral * 100, 2) + "%"
-         : "0%"
+            var ranking = _context.Votaciones
+           .Include(v => v.Plancha)
+           .ThenInclude(pl => pl.Partido)
+           .Where(v => v.PlanchaId != null)
+           .GroupBy(v => v.Plancha.Partido.Nombre)
+           .Select(g => new
+           {
+               Partido = g.Key,
+               Votos = g.Count(),
+               Porcentaje = padronElectoral > 0
+           ? Math.Round((double)g.Count() / padronElectoral * 100, 2) + "%"
+            : "0%"
 
-        })
-    .OrderByDescending(r => r.Votos)
-    .ToList();
+           })
+       .OrderByDescending(r => r.Votos)
+       .ToList();
 
             dgvRankingPartidos.DataSource = ranking;
         }
@@ -71,7 +72,7 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
             }
             else
             {
-                lblTiempoRestante.Text = $"Tiempo Restante: {tiempoRestante.Hours:D2}:{tiempoRestante.Minutes:D2}:{tiempoRestante.Seconds:D2}";
+                lblTiempoRestante.Text = $"{tiempoRestante.Days:D2}d {tiempoRestante.Hours:D2}:{tiempoRestante.Minutes:D2}:{tiempoRestante.Seconds:D2}";
             }
         }
 
@@ -79,5 +80,10 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
         {
             this.Close();
         }
+
+        private void lblTiempoRestante_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-    }
+}

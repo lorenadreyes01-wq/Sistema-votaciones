@@ -54,7 +54,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.SteelBlue;
+            panel1.BackColor = Color.Red;
             panel1.Controls.Add(label1);
             panel1.Location = new Point(0, -2);
             panel1.Name = "panel1";
@@ -87,7 +87,7 @@
             panelEstadisticas.Controls.Add(label2);
             panelEstadisticas.Location = new Point(39, 94);
             panelEstadisticas.Name = "panelEstadisticas";
-            panelEstadisticas.Size = new Size(279, 230);
+            panelEstadisticas.Size = new Size(297, 230);
             panelEstadisticas.TabIndex = 1;
             // 
             // lblTiempoRestante
@@ -100,6 +100,7 @@
             lblTiempoRestante.Size = new Size(139, 21);
             lblTiempoRestante.TabIndex = 9;
             lblTiempoRestante.Text = "Votos Emitidos:";
+            lblTiempoRestante.Click += lblTiempoRestante_Click;
             // 
             // lblTotales
             // 
@@ -199,7 +200,7 @@
             // 
             panelRanking.BackColor = Color.GhostWhite;
             panelRanking.Controls.Add(dgvRankingPartidos);
-            panelRanking.Location = new Point(360, 94);
+            panelRanking.Location = new Point(361, 94);
             panelRanking.Name = "panelRanking";
             panelRanking.Size = new Size(398, 228);
             panelRanking.TabIndex = 2;
@@ -215,7 +216,7 @@
             // btnCerrar
             // 
             btnCerrar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCerrar.Location = new Point(340, 358);
+            btnCerrar.Location = new Point(339, 358);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(122, 35);
             btnCerrar.TabIndex = 3;
@@ -226,7 +227,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Gainsboro;
+            BackColor = Color.RosyBrown;
             ClientSize = new Size(800, 421);
             Controls.Add(btnCerrar);
             Controls.Add(panelRanking);
