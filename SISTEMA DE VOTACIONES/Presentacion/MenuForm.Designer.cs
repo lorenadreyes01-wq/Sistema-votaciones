@@ -36,6 +36,7 @@
             btnPlancha = new Button();
             btnUsuarios = new Button();
             btnSalir = new Button();
+            btnReportes = new Button();
             SuspendLayout();
             // 
             // label1
@@ -93,7 +94,7 @@
             btnCerrar.BackColor = Color.CadetBlue;
             btnCerrar.Font = new Font("Sitka Banner", 12F, FontStyle.Bold);
             btnCerrar.ForeColor = SystemColors.Control;
-            btnCerrar.Location = new Point(157, 121);
+            btnCerrar.Location = new Point(101, 121);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(129, 48);
             btnCerrar.TabIndex = 6;
@@ -131,12 +132,25 @@
             btnSalir.BackColor = Color.CadetBlue;
             btnSalir.Font = new Font("Sitka Banner", 12F, FontStyle.Bold);
             btnSalir.ForeColor = SystemColors.Control;
-            btnSalir.Location = new Point(336, 121);
+            btnSalir.Location = new Point(387, 121);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(129, 48);
             btnSalir.TabIndex = 7;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = false;
+            // 
+            // btnReportes
+            // 
+            btnReportes.BackColor = Color.CadetBlue;
+            btnReportes.Font = new Font("Sitka Banner", 12F, FontStyle.Bold);
+            btnReportes.ForeColor = SystemColors.Control;
+            btnReportes.Location = new Point(245, 122);
+            btnReportes.Name = "btnReportes";
+            btnReportes.Size = new Size(129, 48);
+            btnReportes.TabIndex = 8;
+            btnReportes.Text = "Reportes";
+            btnReportes.UseVisualStyleBackColor = false;
+            btnReportes.Click += btnReportes_Click;
             // 
             // MenuForm
             // 
@@ -144,6 +158,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
             ClientSize = new Size(622, 246);
+            Controls.Add(btnReportes);
             Controls.Add(btnSalir);
             Controls.Add(btnCerrar);
             Controls.Add(btnPlancha);
@@ -169,5 +184,6 @@
         private Button btnPlancha;
         private Button btnUsuarios;
         private Button btnSalir;
+        private Button btnReportes;
     }
 }

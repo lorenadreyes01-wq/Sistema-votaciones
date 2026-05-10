@@ -111,5 +111,11 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
             var panel = new Panelform(_context);
             panel.ShowDialog();
         }
+
+        private void btnReportes_Click(object sender, EventArgs e)
+        {
+            ReportesForm frmReportes = new ReportesForm(_context);
+            frmReportes.ShowDialog();
+        }
     }
 }
