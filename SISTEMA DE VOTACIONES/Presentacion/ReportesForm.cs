@@ -293,14 +293,12 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
                     PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
                     pdfDoc.Open();
 
-                    // 👉 Plancha Ganadora
                     pdfDoc.Add(new Paragraph("Reporte Plancha Ganadora", new iTextFont(iTextFont.FontFamily.HELVETICA, 14, iTextFont.BOLD)));
                     pdfDoc.Add(new Paragraph($"Partido: {lblPartidoGanador.Text}"));
                     pdfDoc.Add(new Paragraph($"Votos: {lblVotosGanador.Text}"));
                     pdfDoc.Add(new Paragraph($"Porcentaje: {lblPorcentajeGanador.Text}"));
                     pdfDoc.Add(new Paragraph("\n"));
 
-                    // 👉 Gráfico pastel (Tab1)
                     using (MemoryStream ms = new MemoryStream())
                     {
                         chartDistribucionGanadora.SaveImage(ms, ChartImageFormat.Png);
@@ -310,21 +308,18 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
                     }
                     pdfDoc.Add(new Paragraph("\n"));
 
-                    // 👉 Integrantes Ganadora (Tab2)
                     pdfDoc.Add(new Paragraph("Integrantes de la Plancha Ganadora", new iTextFont(iTextFont.FontFamily.HELVETICA, 14, iTextFont.BOLD)));
                     pdfDoc.Add(new Paragraph($"Presidente: {lblPresidenteA.Text}"));
                     pdfDoc.Add(new Paragraph($"Vicepresidente: {lblVicepresidenteA.Text}"));
                     pdfDoc.Add(new Paragraph($"Secretario: {lblSecretarioA.Text}"));
                     pdfDoc.Add(new Paragraph("\n"));
 
-                    // 👉 Fotos de candidatos
                     ExportarImagenDePictureBox(pictureBoxPresidenteA, pdfDoc);
                     ExportarImagenDePictureBox(pictureBoxVicepresidenteA, pdfDoc);
                     ExportarImagenDePictureBox(pictureBoxSecretarioA, pdfDoc);
                     ExportarImagenDePictureBox(pictureBoxLogoA, pdfDoc);
                     pdfDoc.Add(new Paragraph("\n"));
 
-                    // 👉 Reporte General de Votos (Tab3)
                     pdfDoc.Add(new Paragraph("Reporte General de Votos", new iTextFont(iTextFont.FontFamily.HELVETICA, 14, iTextFont.BOLD)));
                     using (MemoryStream ms = new MemoryStream())
                     {
@@ -335,9 +330,8 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
                     }
                     pdfDoc.Add(new Paragraph("\n"));
 
-                    // 👉 Listado de Votantes (Tab4)
                     pdfDoc.Add(new Paragraph("Listado de Votantes", new iTextFont(iTextFont.FontFamily.HELVETICA, 14, iTextFont.BOLD)));
-                    foreach (DataGridViewRow row in dataGridVotantes.Rows)
+                    foreach (DataGridViewRow row in dataGridVotos.Rows)
                     {
                         if (!row.IsNewRow)
                         {
@@ -357,7 +351,7 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
             }
         }
 
-        // 👉 Método auxiliar para exportar imágenes de PictureBox
+        
         private void ExportarImagenDePictureBox(PictureBox pic, Document pdfDoc)
         {
             if (pic.Image != null)

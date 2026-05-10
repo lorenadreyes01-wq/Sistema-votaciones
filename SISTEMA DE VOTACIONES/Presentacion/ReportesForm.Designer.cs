@@ -69,6 +69,7 @@
             chartGeneralVotos = new System.Windows.Forms.DataVisualization.Charting.Chart();
             label6 = new Label();
             tabPage4 = new TabPage();
+            btnPdf = new Button();
             lblTotal = new Label();
             label12 = new Label();
             dataGridVotos = new DataGridView();
@@ -76,7 +77,6 @@
             label10 = new Label();
             dataGridVotantes = new DataGridView();
             label15 = new Label();
-            btnPdf = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel2.SuspendLayout();
@@ -515,6 +515,19 @@
             tabPage4.Text = "Votantes";
             tabPage4.Click += tabPage4_Click_1;
             // 
+            // btnPdf
+            // 
+            btnPdf.BackColor = Color.RosyBrown;
+            btnPdf.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPdf.ForeColor = Color.White;
+            btnPdf.Location = new Point(600, 12);
+            btnPdf.Name = "btnPdf";
+            btnPdf.Size = new Size(172, 23);
+            btnPdf.TabIndex = 3;
+            btnPdf.Text = "Exportar PDF";
+            btnPdf.UseVisualStyleBackColor = false;
+            btnPdf.Click += btnPdf_Click;
+            // 
             // lblTotal
             // 
             lblTotal.AutoSize = true;
@@ -580,16 +593,6 @@
             label15.Size = new Size(223, 34);
             label15.TabIndex = 3;
             label15.Text = "Reportes del Sistema";
-            // 
-            // btnPdf
-            // 
-            btnPdf.Location = new Point(600, 12);
-            btnPdf.Name = "btnPdf";
-            btnPdf.Size = new Size(172, 23);
-            btnPdf.TabIndex = 3;
-            btnPdf.Text = "Exportar PDF";
-            btnPdf.UseVisualStyleBackColor = true;
-            btnPdf.Click += btnPdf_Click;
             // 
             // ReportesForm
             // 
