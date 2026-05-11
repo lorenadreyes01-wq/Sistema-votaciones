@@ -100,6 +100,7 @@
             btnCerrar.TabIndex = 6;
             btnCerrar.Text = "Cerrar sesion";
             btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // btnPlancha
             // 
@@ -138,6 +139,7 @@
             btnSalir.TabIndex = 7;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = false;
+            btnSalir.Click += btnSalir_Click;
             // 
             // btnReportes
             // 

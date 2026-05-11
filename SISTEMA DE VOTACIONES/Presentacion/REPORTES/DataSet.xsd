@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dtVotosGenerales" targetNamespace="http://tempuri.org/dtVotosGenerales.xsd" xmlns:mstns="http://tempuri.org/dtVotosGenerales.xsd" xmlns="http://tempuri.org/dtVotosGenerales.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dtVotosGenerales" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="dtVotosGenerales" msprop:Generator_DataSetName="dtVotosGenerales">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtVotosGenerales" msprop:Generator_RowEvHandlerName="dtVotosGeneralesRowChangeEventHandler" msprop:Generator_RowDeletedName="dtVotosGeneralesRowDeleted" msprop:Generator_RowDeletingName="dtVotosGeneralesRowDeleting" msprop:Generator_RowEvArgName="dtVotosGeneralesRowChangeEvent" msprop:Generator_TablePropName="_dtVotosGenerales" msprop:Generator_RowChangedName="dtVotosGeneralesRowChanged" msprop:Generator_RowChangingName="dtVotosGeneralesRowChanging" msprop:Generator_TableClassName="dtVotosGeneralesDataTable" msprop:Generator_RowClassName="dtVotosGeneralesRow" msprop:Generator_TableVarName="tabledtVotosGenerales" msprop:Generator_UserTableName="dtVotosGenerales">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Partido" msprop:Generator_ColumnPropNameInRow="Partido" msprop:Generator_ColumnPropNameInTable="PartidoColumn" msprop:Generator_ColumnVarNameInTable="columnPartido" msprop:Generator_UserColumnName="Partido" type="xs:string" minOccurs="0" />
+              <xs:element name="Votos" msprop:Generator_ColumnPropNameInRow="Votos" msprop:Generator_ColumnPropNameInTable="VotosColumn" msprop:Generator_ColumnVarNameInTable="columnVotos" msprop:Generator_UserColumnName="Votos" type="xs:string" minOccurs="0" />
+              <xs:element name="Porcentaje" msprop:Generator_ColumnPropNameInRow="Porcentaje" msprop:Generator_ColumnPropNameInTable="PorcentajeColumn" msprop:Generator_ColumnVarNameInTable="columnPorcentaje" msprop:Generator_UserColumnName="Porcentaje" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtListadoVotantes" msprop:Generator_RowEvHandlerName="dtListadoVotantesRowChangeEventHandler" msprop:Generator_RowDeletedName="dtListadoVotantesRowDeleted" msprop:Generator_RowDeletingName="dtListadoVotantesRowDeleting" msprop:Generator_RowEvArgName="dtListadoVotantesRowChangeEvent" msprop:Generator_TablePropName="dtListadoVotantes" msprop:Generator_RowChangedName="dtListadoVotantesRowChanged" msprop:Generator_RowChangingName="dtListadoVotantesRowChanging" msprop:Generator_TableClassName="dtListadoVotantesDataTable" msprop:Generator_RowClassName="dtListadoVotantesRow" msprop:Generator_TableVarName="tabledtListadoVotantes" msprop:Generator_UserTableName="dtListadoVotantes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NombreUsuario" msprop:Generator_ColumnPropNameInRow="NombreUsuario" msprop:Generator_ColumnPropNameInTable="NombreUsuarioColumn" msprop:Generator_ColumnVarNameInTable="columnNombreUsuario" msprop:Generator_UserColumnName="NombreUsuario" type="xs:string" minOccurs="0" />
+              <xs:element name="Matricula" msprop:Generator_ColumnPropNameInRow="Matricula" msprop:Generator_ColumnPropNameInTable="MatriculaColumn" msprop:Generator_ColumnVarNameInTable="columnMatricula" msprop:Generator_UserColumnName="Matricula" type="xs:string" minOccurs="0" />
+              <xs:element name="FechaHora" msprop:Generator_ColumnPropNameInRow="FechaHora" msprop:Generator_ColumnPropNameInTable="FechaHoraColumn" msprop:Generator_ColumnVarNameInTable="columnFechaHora" msprop:Generator_UserColumnName="FechaHora" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Curso" msprop:Generator_ColumnPropNameInRow="Curso" msprop:Generator_ColumnPropNameInTable="CursoColumn" msprop:Generator_ColumnVarNameInTable="columnCurso" msprop:Generator_UserColumnName="Curso" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtVotos" msprop:Generator_RowEvHandlerName="dtVotosRowChangeEventHandler" msprop:Generator_RowDeletedName="dtVotosRowDeleted" msprop:Generator_RowDeletingName="dtVotosRowDeleting" msprop:Generator_RowEvArgName="dtVotosRowChangeEvent" msprop:Generator_TablePropName="dtVotos" msprop:Generator_RowChangedName="dtVotosRowChanged" msprop:Generator_RowChangingName="dtVotosRowChanging" msprop:Generator_TableClassName="dtVotosDataTable" msprop:Generator_RowClassName="dtVotosRow" msprop:Generator_TableVarName="tabledtVotos" msprop:Generator_UserTableName="dtVotos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Partido" msprop:Generator_ColumnPropNameInRow="Partido" msprop:Generator_ColumnPropNameInTable="PartidoColumn" msprop:Generator_ColumnVarNameInTable="columnPartido" msprop:Generator_UserColumnName="Partido" type="xs:string" minOccurs="0" />
+              <xs:element name="Cantidad" msprop:Generator_ColumnPropNameInRow="Cantidad" msprop:Generator_ColumnPropNameInTable="CantidadColumn" msprop:Generator_ColumnVarNameInTable="columnCantidad" msprop:Generator_UserColumnName="Cantidad" type="xs:int" minOccurs="0" />
+              <xs:element name="Porcentaje" msprop:Generator_ColumnPropNameInRow="Porcentaje" msprop:Generator_ColumnPropNameInTable="PorcentajeColumn" msprop:Generator_ColumnVarNameInTable="columnPorcentaje" msprop:Generator_UserColumnName="Porcentaje" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtIntegrantes" msprop:Generator_RowEvHandlerName="dtIntegrantesRowChangeEventHandler" msprop:Generator_RowDeletedName="dtIntegrantesRowDeleted" msprop:Generator_RowDeletingName="dtIntegrantesRowDeleting" msprop:Generator_RowEvArgName="dtIntegrantesRowChangeEvent" msprop:Generator_TablePropName="dtIntegrantes" msprop:Generator_RowChangedName="dtIntegrantesRowChanged" msprop:Generator_RowChangingName="dtIntegrantesRowChanging" msprop:Generator_TableClassName="dtIntegrantesDataTable" msprop:Generator_RowClassName="dtIntegrantesRow" msprop:Generator_TableVarName="tabledtIntegrantes" msprop:Generator_UserTableName="dtIntegrantes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NombrePartido" msprop:Generator_ColumnPropNameInRow="NombrePartido" msprop:Generator_ColumnPropNameInTable="NombrePartidoColumn" msprop:Generator_ColumnVarNameInTable="columnNombrePartido" msprop:Generator_UserColumnName="NombrePartido" type="xs:string" minOccurs="0" />
+              <xs:element name="Lema" msprop:Generator_ColumnPropNameInRow="Lema" msprop:Generator_ColumnPropNameInTable="LemaColumn" msprop:Generator_ColumnVarNameInTable="columnLema" msprop:Generator_UserColumnName="Lema" type="xs:string" minOccurs="0" />
+              <xs:element name="Presidente" msprop:Generator_ColumnPropNameInRow="Presidente" msprop:Generator_ColumnPropNameInTable="PresidenteColumn" msprop:Generator_ColumnVarNameInTable="columnPresidente" msprop:Generator_UserColumnName="Presidente" type="xs:string" minOccurs="0" />
+              <xs:element name="Vicepresidente" msprop:Generator_ColumnPropNameInRow="Vicepresidente" msprop:Generator_ColumnPropNameInTable="VicepresidenteColumn" msprop:Generator_ColumnVarNameInTable="columnVicepresidente" msprop:Generator_UserColumnName="Vicepresidente" type="xs:string" minOccurs="0" />
+              <xs:element name="Secretario" msprop:Generator_ColumnPropNameInRow="Secretario" msprop:Generator_ColumnPropNameInTable="SecretarioColumn" msprop:Generator_ColumnVarNameInTable="columnSecretario" msprop:Generator_UserColumnName="Secretario" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

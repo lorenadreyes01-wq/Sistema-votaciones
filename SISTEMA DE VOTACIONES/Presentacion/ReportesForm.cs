@@ -1,8 +1,14 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
 using SISTEMA_DE_VOTACIONES.Conexion;
+using SISTEMA_DE_VOTACIONES.Entidades;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Design;
+using Stimulsoft.Report.Viewer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,190 +16,34 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static Stimulsoft.Report.Win.Images.StiReportViewerImages;
 using DrawingFont = System.Drawing.Font;
 using DrawingImage = System.Drawing.Image;
 using iTextFont = iTextSharp.text.Font;
 using iTextImage = iTextSharp.text.Image;
 
 
-
 namespace SISTEMA_DE_VOTACIONES.Presentacion
 {
     public partial class ReportesForm : Form
     {
+        object varIntegrantes;
+        object varGanador;
+        object varGeneralVotos;
+        object varParticipantes;
+
         private readonly SistemaVotacionesContext _context;
+        private StiReport miReporte;
 
         public ReportesForm(SistemaVotacionesContext context)
         {
             InitializeComponent();
             _context = context;
-        }
 
-        private void CargarListadoVotantes()
-        {
-            var votantes = _context.Votaciones
-                .Include(v => v.Usuario)
-                .Select(v => new
-                {
-                    Nombre = v.Usuario.Nombre,
-                    Matricula = v.Usuario.Matricula,
-                    Curso = v.Usuario.Curso,
-                    FechaVoto = v.Fecha
-                })
-                .ToList();
-
-            dataGridVotos.DataSource = votantes;
-
-            dataGridVotos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridVotos.BackgroundColor = Color.White;
-
-            dataGridVotos.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10);
-            dataGridVotos.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold);
-
-            dataGridVotos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridVotos.EnableHeadersVisualStyles = false;
-
-            lblTotal.Text = $"Total de votantes: {votantes.Count}";
+            miReporte = new StiReport();
         }
 
 
-        private void CargarReporteGeneralVotos()
-        {
-          
-            chartGeneralVotos.Series.Clear();
-
-            Series serieAlofoke = new Series("Alofoke")
-            {
-                ChartType = SeriesChartType.Column,
-                Color = Color.Blue,
-                IsValueShownAsLabel = true
-            };
-
-            Series serieOtro = new Series("Otro Partido")
-            {
-                ChartType = SeriesChartType.Column,
-                Color = Color.Red,
-                IsValueShownAsLabel = true
-            };
-
-            chartGeneralVotos.Series.Add(serieAlofoke);
-            chartGeneralVotos.Series.Add(serieOtro);
-
-         
-            var distribucion = _context.Votaciones
-                .Include(v => v.Plancha)
-                .ThenInclude(p => p.Partido)
-                .Where(v => v.PlanchaId != null)
-                .GroupBy(v => v.Plancha.Partido.Nombre)
-                .Select(g => new
-                {
-                    Partido = g.Key,
-                    Cantidad = g.Count()
-                })
-                .ToList();
-
-            foreach (var d in distribucion)
-            {
-                if (d.Partido == "Alofoke")
-                    serieAlofoke.Points.AddXY(d.Partido, d.Cantidad);
-                else
-                    serieOtro.Points.AddXY(d.Partido, d.Cantidad);
-            }
-
-            chartGeneralVotos.ChartAreas[0].AxisX.Title = "Partidos";
-            chartGeneralVotos.ChartAreas[0].AxisY.Title = "Cantidad de Votos";
-            chartGeneralVotos.ChartAreas[0].AxisX.LabelStyle.Font = new System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold);
-            chartGeneralVotos.ChartAreas[0].AxisY.LabelStyle.Font = new System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold);
-        }
-
-        
-
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void tabPage2_Enter(object sender, EventArgs e)
-        {
-            CargarIntegrantesGanadora();
-        }
-
-        private void tabPage3_Enter(object sender, EventArgs e)
-        {
-            CargarReporteGeneralVotos();
-        }
-
-        private void tabPage4_Enter(object sender, EventArgs e)
-        {
-            CargarListadoVotantes();
-        }
-
-
-
-        private void CargarReportePlanchaGanadora()
-        {
-            chartDistribucionGanadora.Series.Clear();
-
-            Series serie = new Series("Distribución")
-            {
-                ChartType = SeriesChartType.Pie,
-                IsValueShownAsLabel = true
-            };
-
-            chartDistribucionGanadora.Series.Add(serie);
-
-            var ganadora = _context.Votaciones
-                .Where(v => v.PlanchaId != null)
-                .GroupBy(v => v.PlanchaId)
-                .Select(g => new
-                {
-                    PlanchaId = g.Key,
-                    Votos = g.Count()
-                })
-                .OrderByDescending(x => x.Votos)
-                .FirstOrDefault();
-
-            if (ganadora != null)
-            {
-                var plancha = _context.Planchas
-                    .Include(p => p.Partido)
-                    .FirstOrDefault(p => p.Id == ganadora.PlanchaId);
-
-                if (plancha != null)
-                {
-                    lblPartidoGanador.Text = $"Ganador: {plancha.Partido.Nombre}";
-                    lblVotosGanador.Text = $"Votos: {ganadora.Votos}";
-
-                    int totalVotos = _context.Votaciones.Count();
-                    double porcentaje = (ganadora.Votos * 100.0) / totalVotos;
-                    lblPorcentajeGanador.Text = $"Participación: {porcentaje:F2}%";
-                }
-            }
-
-            var distribucion = _context.Votaciones
-                .Where(v => v.PlanchaId != null)
-                .GroupBy(v => v.Plancha.Partido.Nombre)
-                .Select(g => new
-                {
-                    Partido = g.Key,
-                    Cantidad = g.Count()
-                })
-                .ToList();
-
-            foreach (var d in distribucion)
-            {
-                chartDistribucionGanadora.Series["Distribución"].Points.AddXY(d.Partido, d.Cantidad);
-            }
-
-            chartDistribucionGanadora.Legends[0].Docking = Docking.Bottom;
-            chartDistribucionGanadora.Legends[0].Font = new System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold);
-        }
 
 
         private void panelEstadisticasGanadora_Paint(object sender, PaintEventArgs e)
@@ -205,50 +55,7 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
 
         }
 
-        private void CargarIntegrantesGanadora()
-        {
-            var ganadora = _context.Votaciones
-                .Where(v => v.PlanchaId != null)
-                .GroupBy(v => v.PlanchaId)
-                .Select(g => new
-                {
-                    PlanchaId = g.Key,
-                    Votos = g.Count()
-                })
-                .OrderByDescending(x => x.Votos)
-                .FirstOrDefault();
 
-            if (ganadora != null)
-            {
-                var plancha = _context.Planchas
-                    .Include(p => p.Partido)
-                    .FirstOrDefault(p => p.Id == ganadora.PlanchaId);
-
-                if (plancha != null)
-                {
-                    lblPresidenteA.Text = plancha.Presidente;
-                    lblVicepresidenteA.Text = plancha.Vicepresidente;
-                    lblSecretarioA.Text = plancha.Secretario;
-
-                    if (!string.IsNullOrEmpty(plancha.PresidenteFoto) && File.Exists(plancha.PresidenteFoto))
-                        pictureBoxPresidenteA.Image = System.Drawing.Image.FromFile(plancha.PresidenteFoto);
-
-                    if (!string.IsNullOrEmpty(plancha.VicepresidenteFoto) && File.Exists(plancha.VicepresidenteFoto))
-                        pictureBoxVicepresidenteA.Image = System.Drawing.Image.FromFile(plancha.VicepresidenteFoto);
-
-                    if (!string.IsNullOrEmpty(plancha.SecretarioFoto) && File.Exists(plancha.SecretarioFoto))
-                        pictureBoxSecretarioA.Image = System.Drawing.Image.FromFile(plancha.SecretarioFoto);
-
-                    if (plancha.Partido != null && !string.IsNullOrEmpty(plancha.Partido.Logo) && File.Exists(plancha.Partido.Logo))
-                        pictureBoxLogoA.Image = System.Drawing.Image.FromFile(plancha.Partido.Logo);
-
-                    pictureBoxPresidenteA.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pictureBoxVicepresidenteA.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pictureBoxSecretarioA.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pictureBoxLogoA.SizeMode = PictureBoxSizeMode.StretchImage;
-                }
-            }
-        }
 
         private void ReportesForm_Load(object sender, EventArgs e)
         {
@@ -272,101 +79,190 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
 
         }
 
-        private void tabPage1_Enter(object sender, EventArgs e)
-        {
-            CargarReportePlanchaGanadora();
-        }
 
         private void btnPdf_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFile = new SaveFileDialog
+            try
             {
-                Filter = "PDF|*.pdf",
-                Title = "Guardar Reporte General"
-            };
-
-            if (saveFile.ShowDialog() == DialogResult.OK)
-            {
-                using (FileStream stream = new FileStream(saveFile.FileName, FileMode.Create))
+                if (stiViewerControl1.Report == null)
                 {
-                    Document pdfDoc = new Document(PageSize.A4, 25, 25, 30, 30);
-                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                    pdfDoc.Open();
-
-                    pdfDoc.Add(new Paragraph("Reporte Plancha Ganadora", new iTextFont(iTextFont.FontFamily.HELVETICA, 14, iTextFont.BOLD)));
-                    pdfDoc.Add(new Paragraph($"Partido: {lblPartidoGanador.Text}"));
-                    pdfDoc.Add(new Paragraph($"Votos: {lblVotosGanador.Text}"));
-                    pdfDoc.Add(new Paragraph($"Porcentaje: {lblPorcentajeGanador.Text}"));
-                    pdfDoc.Add(new Paragraph("\n"));
-
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        chartDistribucionGanadora.SaveImage(ms, ChartImageFormat.Png);
-                        iTextImage chartImage = iTextImage.GetInstance(ms.ToArray());
-                        chartImage.ScaleToFit(400f, 300f);
-                        pdfDoc.Add(chartImage);
-                    }
-                    pdfDoc.Add(new Paragraph("\n"));
-
-                    pdfDoc.Add(new Paragraph("Integrantes de la Plancha Ganadora", new iTextFont(iTextFont.FontFamily.HELVETICA, 14, iTextFont.BOLD)));
-                    pdfDoc.Add(new Paragraph($"Presidente: {lblPresidenteA.Text}"));
-                    pdfDoc.Add(new Paragraph($"Vicepresidente: {lblVicepresidenteA.Text}"));
-                    pdfDoc.Add(new Paragraph($"Secretario: {lblSecretarioA.Text}"));
-                    pdfDoc.Add(new Paragraph("\n"));
-
-                    ExportarImagenDePictureBox(pictureBoxPresidenteA, pdfDoc);
-                    ExportarImagenDePictureBox(pictureBoxVicepresidenteA, pdfDoc);
-                    ExportarImagenDePictureBox(pictureBoxSecretarioA, pdfDoc);
-                    ExportarImagenDePictureBox(pictureBoxLogoA, pdfDoc);
-                    pdfDoc.Add(new Paragraph("\n"));
-
-                    pdfDoc.Add(new Paragraph("Reporte General de Votos", new iTextFont(iTextFont.FontFamily.HELVETICA, 14, iTextFont.BOLD)));
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        chartGeneralVotos.SaveImage(ms, ChartImageFormat.Png);
-                        iTextImage chartImage = iTextImage.GetInstance(ms.ToArray());
-                        chartImage.ScaleToFit(400f, 300f);
-                        pdfDoc.Add(chartImage);
-                    }
-                    pdfDoc.Add(new Paragraph("\n"));
-
-                    pdfDoc.Add(new Paragraph("Listado de Votantes", new iTextFont(iTextFont.FontFamily.HELVETICA, 14, iTextFont.BOLD)));
-                    foreach (DataGridViewRow row in dataGridVotos.Rows)
-                    {
-                        if (!row.IsNewRow)
-                        {
-                            pdfDoc.Add(new Paragraph(
-                                $"{row.Cells["Nombre"].Value} - {row.Cells["Matricula"].Value} - {row.Cells["Curso"].Value} - {row.Cells["FechaVoto"].Value}"
-                            ));
-                        }
-                    }
-                    pdfDoc.Add(new Paragraph($"\n{lblTotalVotantes.Text}"));
-
-                    pdfDoc.Close();
-                    writer.Close();
-                    stream.Close();
+                    MessageBox.Show("Por favor, carga un reporte primero.");
+                    return;
                 }
 
-                MessageBox.Show("Reporte exportado correctamente a PDF", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Archivo PDF (*.pdf)|*.pdf";
+                saveFileDialog.Title = "Guardar Reporte de Votaciones";
+                saveFileDialog.FileName = "Reporte_Final_Votaciones.pdf";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    StiReport reporteAExportar = stiViewerControl1.Report;
+
+                    reporteAExportar.ExportDocument(StiExportFormat.Pdf, saveFileDialog.FileName);
+
+                    MessageBox.Show("¡PDF generado exitosamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al exportar a PDF: " + ex.Message, "Error Técnico", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        
-        private void ExportarImagenDePictureBox(PictureBox pic, Document pdfDoc)
+
+        private dynamic CargarDatosDeBaseDeDatos(int op)
         {
-            if (pic.Image != null)
+            switch (op)
             {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    pic.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                    iTextImage foto = iTextImage.GetInstance(ms.ToArray());
-                    foto.ScaleToFit(120f, 120f);
-                    pdfDoc.Add(foto);
-                }
+                case 0:
+                    return _context.Planchas
+        .Select(p => new
+        {
+            NombrePartido = p.Partido.Nombre,
+            p.Presidente,
+            p.Vicepresidente,
+            p.Secretario,
+            Votos = _context.Votaciones.Count(v => v.PlanchaId == p.Id) // Usa "Votos" igual que en el case 0
+        })
+        .OrderByDescending(x => x.Votos)
+        .Take(1)
+        .ToList();
+
+                case 1: 
+                    return _context.Planchas
+                        .Select(p => new {
+                            NombrePartido = p.Partido.Nombre,
+                            p.Presidente,
+                            p.Vicepresidente,
+                            p.Secretario,
+                            Votos = _context.Votaciones.Count(v => v.PlanchaId == p.Id)
+                        })
+                        .OrderByDescending(x => x.Votos)
+                        .Take(1)
+                        .ToList();
+
+                case 2:
+                    return _context.Planchas
+                        .Select(p => new
+                        {
+                            NombrePartido = p.Partido.Nombre,
+                            CantidadVotos = _context.Votaciones.Count(v => v.PlanchaId == p.Id)
+                        }).ToList();
+
+                case 3:
+                    return _context.Usuarios
+                        .Where(u => u.Rol == "Votante")
+                        .Select(u => new
+                        {
+                            u.Matricula,
+                            u.Nombre,
+                            u.Curso,
+                            Estado = _context.Votaciones.Any(v => v.UsuarioId == u.Id) ? "Votó" : "Pendiente"
+                        }).ToList();
+
+                default:
+                    return null;
             }
         }
-      
 
-      
+        private void CargarReporte(string rutaCompleta)
+        {
+            try
+            {
+                varIntegrantes = CargarDatosDeBaseDeDatos(0);
+                varGanador = CargarDatosDeBaseDeDatos(1);
+                varGeneralVotos = CargarDatosDeBaseDeDatos(2);
+                varParticipantes = CargarDatosDeBaseDeDatos(3);
+
+                StiReport report = new StiReport();
+
+                if (!File.Exists(rutaCompleta))
+                {
+                    MessageBox.Show("No existe el archivo en: " + rutaCompleta);
+                    return;
+                }
+
+                report.Load(rutaCompleta);
+
+                report.RegData("Repo_Integrantes", varIntegrantes);
+                report.RegData("Repo_Ganador", varGanador);
+                report.RegData("Repo_General", varGeneralVotos);
+                report.RegData("Repo_Participantes", varParticipantes);
+
+                report.Dictionary.Synchronize();
+                report.Render(false);
+
+                stiViewerControl1.Report = report;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error técnico: " + ex.Message);
+            }
+        }
+
+        private void stiViewerControl1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CargarReporte(@"C:\Users\asisc\source\repos\SISTEMA DE VOTACIONES\SISTEMA DE VOTACIONES\Presentacion\REPORTES\Ganador.mrt");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            CargarReporte(@"C:\Users\asisc\source\repos\SISTEMA DE VOTACIONES\SISTEMA DE VOTACIONES\Presentacion\REPORTES\Participantes.mrt");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            CargarReporte(@"C:\Users\asisc\source\repos\SISTEMA DE VOTACIONES\SISTEMA DE VOTACIONES\Presentacion\REPORTES\GENERAL.mrt");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CargarReporte(@"C:\Users\asisc\source\repos\SISTEMA DE VOTACIONES\SISTEMA DE VOTACIONES\Presentacion\REPORTES\Integrantes.mrt");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var data0 = CargarDatosDeBaseDeDatos(0);
+                var data1 = CargarDatosDeBaseDeDatos(1);
+                var data2 = CargarDatosDeBaseDeDatos(2);
+                var data3 = CargarDatosDeBaseDeDatos(3);
+
+                StiReport report = new StiReport();
+
+                string nombreArchivo = "Ganador.mrt";
+                string ruta = Path.Combine(@"C:\Users\asisc\source\repos\SISTEMA DE VOTACIONES\SISTEMA DE VOTACIONES\Presentacion\REPORTES", nombreArchivo);
+
+                if (File.Exists(ruta))
+                {
+                    report.Load(ruta);
+                }
+                else
+                {
+                    MessageBox.Show("El archivo no existe en la ruta especificada.");
+                    return;
+                }
+
+                report.RegData("Repo_Integrantes", data0);
+                report.RegData("Repo_Ganador", data1);
+                report.RegData("Repo_General", data2);
+                report.RegData("Repo_Participantes", data3);
+
+                report.Dictionary.Synchronize();
+
+                report.Design();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir el editor: " + ex.Message);
+            }
+        }
     }
 }

@@ -117,5 +117,18 @@ namespace SISTEMA_DE_VOTACIONES.Presentacion
             ReportesForm frmReportes = new ReportesForm(_context);
             frmReportes.ShowDialog();
         }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            LoginForm login = new LoginForm();
+            login.Show();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

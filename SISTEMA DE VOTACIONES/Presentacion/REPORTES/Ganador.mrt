@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="4">
+      <Repo_Integrantes Ref="2" type="Stimulsoft.Report.Dictionary.StiBusinessObjectSource" isKey="true">
+        <Alias>Repo_Integrantes</Alias>
+        <Columns isList="true" count="8">
+          <value>NombrePartido,System.String</value>
+          <value>Presidente,System.String</value>
+          <value>Vicepresidente,System.String</value>
+          <value>Secretario,System.String</value>
+          <value>Lema,System.String</value>
+          <value>Votos,System.Int32</value>
+          <value>_ID,System.Int32</value>
+          <value>_Current,System.Object</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>63634c723fb644519a7560786774745d</Key>
+        <Name>Repo_Integrantes</Name>
+        <NameInSource>Repo_Integrantes</NameInSource>
+      </Repo_Integrantes>
+      <Repo_Ganador Ref="3" type="Stimulsoft.Report.Dictionary.StiBusinessObjectSource" isKey="true">
+        <Alias>Repo_Ganador</Alias>
+        <Columns isList="true" count="9">
+          <value>Partido,System.String</value>
+          <value>Presidente,System.String</value>
+          <value>TotalVotos,System.Int32</value>
+          <value>_ID,System.Int32</value>
+          <value>_Current,System.Object</value>
+          <value>NombrePartido,System.String</value>
+          <value>Vicepresidente,System.String</value>
+          <value>Secretario,System.String</value>
+          <value>Votos,System.Int32</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>bdd41db72c684f64a49f8fffff062044</Key>
+        <Name>Repo_Ganador</Name>
+        <NameInSource>Repo_Ganador</NameInSource>
+      </Repo_Ganador>
+      <Repo_General Ref="4" type="Stimulsoft.Report.Dictionary.StiBusinessObjectSource" isKey="true">
+        <Alias>Repo_General</Alias>
+        <Columns isList="true" count="4">
+          <value>NombrePartido,System.String</value>
+          <value>CantidadVotos,System.Int32</value>
+          <value>_ID,System.Int32</value>
+          <value>_Current,System.Object</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>ab33c566c5a34eb4b9977f907fafa9dd</Key>
+        <Name>Repo_General</Name>
+        <NameInSource>Repo_General</NameInSource>
+      </Repo_General>
+      <Repo_Participantes Ref="5" type="Stimulsoft.Report.Dictionary.StiBusinessObjectSource" isKey="true">
+        <Alias>Repo_Participantes</Alias>
+        <Columns isList="true" count="6">
+          <value>Matricula,System.String</value>
+          <value>Nombre,System.String</value>
+          <value>Curso,System.String</value>
+          <value>Estado,System.String</value>
+          <value>_ID,System.Int32</value>
+          <value>_Current,System.Object</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>6bfdac2fc9b94c55a488c6d6c10d1e24</Key>
+        <Name>Repo_Participantes</Name>
+        <NameInSource>Repo_Participantes</NameInSource>
+      </Repo_Participantes>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <UserFunctions isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>28c808f977fa471da86c0d896f8902a2</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="6" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <HeaderBand1 Ref="7" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,0.8</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text2 Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,19,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,16,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Name>Text2</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>GANADOR</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>HeaderBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </HeaderBand1>
+        <DataBand1 Ref="9" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,2,19,11</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text1 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.2,19,2.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Name>Text1</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Text>{Repo_Ganador.NombrePartido}
+Ha resultado electa como la directiva oficial para el periodo escolar vigente, 
+contando con el respaldo mayoritario de la comunidad estudiantil.
+CON UN TOTAL DE VOTOS: 8</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Chart1 Ref="11" type="Stimulsoft.Report.Chart.StiChart" isKey="true">
+              <Area Ref="12" type="Stimulsoft.Report.Chart.StiPieArea" isKey="true">
+                <BorderColor>Transparent</BorderColor>
+                <BorderThickness>1</BorderThickness>
+                <Brush>[255:255:255]</Brush>
+                <Chart isRef="11" />
+              </Area>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>4.2,3.6,10.6,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <ConstantLines isList="true" count="0" />
+              <CustomStyleName />
+              <EditorType>Simple</EditorType>
+              <Expressions isList="true" count="0" />
+              <Filters isList="true" count="0" />
+              <Name>Chart1</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Series isList="true" count="1">
+                <Item11 Ref="13" type="Stimulsoft.Report.Chart.StiPieSeries" isKey="true">
+                  <ArgumentDataColumn>Repo_General.NombrePartido</ArgumentDataColumn>
+                  <BorderColor>Transparent</BorderColor>
+                  <Brush>[52:152:219]</Brush>
+                  <Chart isRef="11" />
+                  <Conditions isList="true" count="0" />
+                  <Filters isList="true" count="0" />
+                  <Lighting>False</Lighting>
+                  <SeriesLabels Ref="14" type="Stimulsoft.Report.Chart.StiCenterAxisLabels" isKey="true">
+                    <BorderColor>Transparent</BorderColor>
+                    <Brush>[119:255:255:255]</Brush>
+                    <Chart isRef="11" />
+                    <Font>Arial,10</Font>
+                    <LabelColor>50, 58, 69</LabelColor>
+                    <MarkerSize>8, 6</MarkerSize>
+                    <ValueTypeSeparator>-</ValueTypeSeparator>
+                    <Width>0</Width>
+                  </SeriesLabels>
+                  <ShowShadow>False</ShowShadow>
+                  <Title>Series 1</Title>
+                  <ValueDataColumn>Repo_General.CantidadVotos</ValueDataColumn>
+                </Item11>
+              </Series>
+              <SeriesLabels Ref="15" type="Stimulsoft.Report.Chart.StiCenterPieLabels" isKey="true">
+                <BorderColor>Transparent</BorderColor>
+                <Brush>[119:255:255:255]</Brush>
+                <Chart isRef="11" />
+                <Font>Arial,10</Font>
+                <LabelColor>50, 58, 69</LabelColor>
+                <MarkerSize>8, 6</MarkerSize>
+                <ValueTypeSeparator>-</ValueTypeSeparator>
+                <Width>0</Width>
+              </SeriesLabels>
+              <SeriesLabelsConditions isList="true" count="0" />
+              <Sort isList="true" count="0" />
+              <Strips isList="true" count="0" />
+              <Style Ref="16" type="Stimulsoft.Report.Chart.StiStyle29" isKey="true">
+                <Conditions isList="true" count="0" />
+                <Name />
+              </Style>
+            </Chart1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Repo_Ganador</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>f4155cbae6e04d6198507c7bd88b6299</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>5/11/2026 4:15:38 PM</ReportChanged>
+  <ReportCreated>5/11/2026 12:41:54 PM</ReportCreated>
+  <ReportFile>C:\Users\asisc\source\repos\SISTEMA DE VOTACIONES\SISTEMA DE VOTACIONES\Presentacion\REPORTES\Ganador.mrt</ReportFile>
+  <ReportGuid>0449f7dff4d24917ad087b6d701ab6f7</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2026.2.2.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+  <UsePlatformDependentScript>False</UsePlatformDependentScript>
+</StiSerializer>
