@@ -1,5 +1,38 @@
-﻿.vs/
+# Carpetas de compilación
 bin/
 obj/
-SIATEMA DE VOTACIONES.slnx
-SIATEMA DE VOTACIONES/
+Debug/
+Release/
+
+# Configuración local de Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Archivos de solución y proyecto
+SISTEMA DE VOTACIONES.slnx
+SISTEMA DE VOTACIONES/
+
+# Archivos de base de datos locales
+*.mdf
+*.ldf
+*.dbmdl
+
+# Paquetes NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Logs y temporales
+*.log
+*.tmp
+*.bak
+
+# Archivos de sistema
+Thumbs.db
+.DS_Store
+
+# Publicaciones
+publish/
